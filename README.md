@@ -1,5 +1,5 @@
 # Modal Monitor
-A dead simple JS library (with zero dependancies) that will help you trigger modal popups based on time, or scroll position
+A simple JS library (with zero dependancies) that will help you trigger modal popups based on time, or scroll position
 
 ## Quick Overview
 
@@ -10,6 +10,7 @@ Each each element that you intend to turn into a modal should be wrapped in a DI
 ### The modal
 
 **Required Attributes**
+
 Four attributes must be present with each element that you'd like to turn into a modal:
 
 1. A unique id
@@ -22,6 +23,7 @@ Four attributes must be present with each element that you'd like to turn into a
 You can have as many modals on a page as you'd like as long as they each have the 4 attributes listed above.
 
 **Optional Attributes**
+
 The following attribute can optionally be added to any `.modal-monitor` element:
 
 - A `data-frequency` attribute can be set to a positive integer (i.e. 1, 7, 30, 365). The frequency attribute sets the number of days a modal should be hidden, before being viewed again by a visitor. The default value being 30 days (if a frequency is not manually set). Note: Once a conversion is set via the `MODAL.Monitor.conversion(id)` method, a modal will no longer be shown, no matter the frequency that is set.
