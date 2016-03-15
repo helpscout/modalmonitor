@@ -76,7 +76,7 @@ Example usage: `MODAL.Monitor.init();`
 
 **conversion()**
 
-Add a conversion for a specific modal based on the id you give it. Once a modal has a conversion, I will not be shown again no matter the frequency that is set.
+Add a conversion for a specific modal based on the id you give it. Once a modal has a conversion, it will not be shown again no matter the frequency that is set.
 
 Example usage: `MODAL.Monitor.conversion('scrollmiddle');`
 
