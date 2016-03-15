@@ -5,12 +5,8 @@
 if ( !window.MODAL ) { window.MODAL = {}; }
 
 window.MODAL.Monitor = function () {
-	
-	// Variables for debounce function below
-	var debounceRun = true,
-		timer = 0;
 
-	// Bare bones simulation of jQuery like query selector
+	// Bare bones simulation of jQuery-like query selector
 	function $(el) {
 		return document.querySelectorAll(el);
 	}
@@ -51,6 +47,8 @@ window.MODAL.Monitor = function () {
 	}
 
 	// Debounce (used for scrolling event)
+	var debounceRun = true,
+		timer = 0;
 	function debounce(fn, delay) {
 		if (debounceRun) {
 			debounceRun = false;
@@ -120,31 +118,28 @@ window.MODAL.Monitor = function () {
 	function showModal(el) {
 		var thisId = el.getAttribute('id'),
 			thisCookie = cookieGet(thisId);
+		// If there is no ID, return false
 		if (!thisId) {
 			return false;
 		}
-		
 		// Check for conversions
 		// If they've already converted', never show this modal again
 		if (thisCookie && 'conversion-true' === thisCookie) {
 			return false;
 		}
-
 		// If cookie is already set, return false
 		if (cookieGet(thisId)) {
 			return false;
 		}
-
 		// No cookie is set
 		// Add cookie for frequency specified (default is 30 days if no frequency is set)
 		cookieSet(thisId,'conversion-false',data(el, 'frequency') || 30);
 		// Show the backdrop
 		$('.modal-monitor-backdrop')[0].style.display = 'block';
-		// First hide all other modals
+		// Hide all other modals
 		hideAllModals();
 		// Then show this modal
 		el.style.display = 'block';
-		
 	}
 
 	// Public facing methods
