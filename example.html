@@ -642,9 +642,9 @@
 		</p>
 	</section>
 	<div class="modal-monitor-backdrop">
-		<div id="scrollbottom" class="modal-monitor" data-method="scroll" data-trigger="bottom">You scrolled to the bottom of the page</div>
-		<div id="timed3000" class="modal-monitor" data-method="timed" data-trigger="3000">Timed modal after 3 seconds</div>
-		<div id="timed10000" class="modal-monitor" data-method="timed" data-trigger="10000">Timed modal after 10 seconds</div>
+		<div id="scrollbottom" class="modal-monitor" data-method="scroll" data-trigger="bottom">You scrolled to the bottom of the page. No frequency was set, so this modal will stay hidden for the default 30 days before being shown again.</div>
+		<div id="timed3000" class="modal-monitor" data-method="timed" data-trigger="3000" data-frequency="1">Timed modal after 3 seconds. With the frequency set to 1, this modal will be re-shown after 1 day (as long as no conversion has been registered).</div>
+		<div id="timed10000" class="modal-monitor" data-method="timed" data-trigger="10000" data-frequency="7">Timed modal after 10 seconds. With the frequency set to 7, this modal will be re-shown after 7 day (as long as no conversion has been registered).</div>
 	</div>
 	<script type="text/javascript" src="modalmonitor.js"></script>
 	<script>

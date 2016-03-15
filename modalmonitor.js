@@ -15,6 +15,11 @@ window.MODAL.Monitor = function () {
 		return document.querySelectorAll(el);
 	}
 
+	// Add conversion (as a result, the modal will no longer be shown)
+	function addConversion(id) {
+		cookieSet(id,'conversion-true',10000);
+	}
+
 	// Add cookie
 	function cookieSet(name,value,days) {
 		var expires = '';
@@ -61,6 +66,11 @@ window.MODAL.Monitor = function () {
 		}
 	}
 
+	// Checks to see if an ID has a #, and removes it
+	function hexRemoval(id) {
+		return id.replace('#', '');
+	}
+
 	// Hides modal backdrop, and all modals
 	function hideModal() {
 		$('.modal-monitor-backdrop')[0].style.display = 'none';
@@ -79,6 +89,7 @@ window.MODAL.Monitor = function () {
 	function initModalMonitor(el) {
 		// Grab data attributes on modal container
 		var settings = {};
+			settings.frequency = data(el, 'frequency') || 30,
 			settings.method = data(el, 'method'),
 			settings.trigger = data(el, 'trigger');
 		// Scrolling method
@@ -109,21 +120,33 @@ window.MODAL.Monitor = function () {
 
 	// Show a specific modal
 	function showModal(el) {
-		var thisId = el.getAttribute('id');
+		var thisId = el.getAttribute('id'),
+			thisCookie = cookieGet(thisId);
 		if (!thisId) {
 			return false;
 		}
-		// Only show each modal once
-		if (!cookieGet(thisId)) {
-			// Add cookie
-			cookieSet(thisId,true,30);
-			// Show the backdrop
-			$('.modal-monitor-backdrop')[0].style.display = 'block';
-			// First hide all other modals
-			hideAllModals();
-			// Then show this modal
-			el.style.display = 'block';
+		
+		// Check for conversions
+		// If they've already converted', never show this modal again
+		if (thisCookie && 'conversion-true' === thisCookie) {
+			return false;
 		}
+
+		// If cookie is already set, return false
+		if (cookieGet(thisId)) {
+			return false;
+		}
+
+		// No cookie is set
+		// Add cookie for frequency specified (default is 30 days if no frequency is set)
+		cookieSet(thisId,'conversion-false',data(el, 'frequency') || 30);
+		// Show the backdrop
+		$('.modal-monitor-backdrop')[0].style.display = 'block';
+		// First hide all other modals
+		hideAllModals();
+		// Then show this modal
+		el.style.display = 'block';
+		
 	}
 
 	// Public facing methods
@@ -139,10 +162,15 @@ window.MODAL.Monitor = function () {
   				window.MODAL.Monitor.hide();
   			});
 		},
+		conversion: function(id) {
+			id = hexRemoval(id);
+			addConversion(id);
+		},
 		hide: function() {
 			hideModal();
 		},
 		show: function(id) {
+			id = hexRemoval(id);
 			var el = Document.getElementById(id);
 			showModal(el);
 		}
