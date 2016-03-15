@@ -26,14 +26,14 @@ window.MODAL.Monitor = function () {
 		if (days) {
 			var date = new Date();
 			date.setTime(date.getTime()+(days*24*60*60*1000));
-			expires = "; expires="+date.toGMTString();
+			expires = '; expires='+date.toGMTString();
 		}
-		document.cookie = name+"="+value+expires+"; path=/";
+		document.cookie = name+'='+value+expires+'; path=/';
 	}
 
 	// Check for existing cookie
 	function cookieGet(name) {
-		var nameIs = name + "=";
+		var nameIs = name + '=';
 		var ca = document.cookie.split(';');
 		for (var i=0;i < ca.length;i++) {
 			var c = ca[i];
@@ -97,10 +97,8 @@ window.MODAL.Monitor = function () {
 			var bodyHeight = document.body.offsetHeight,
 				middle = parseInt(bodyHeight/2),
 				bottom = parseInt(bodyHeight-[bodyHeight*0.15]);
-
 			document.addEventListener('scroll', debounce(function() {
 				var scrolled = document.body.scrollTop;
-
 				if ('middle' === settings.trigger && middle < scrolled) {
 					showModal(el);
 				}
