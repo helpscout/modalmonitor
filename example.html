@@ -1,0 +1,654 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Delayed Popup Example</title>
+	<style>
+		/* Base styles */
+		* { margin: 0; padding: 0; }
+		body { font-family: sans-serif; font-size: 14px; text-align: center; }
+		.container { margin: 100px auto; max-width: 796px; text-align: left; }
+		h2 { margin-bottom: 46px; text-align: center; }
+		.modal-backdrop { background: rgba(0,0,0,0.7); bottom: 0; display: none; left: 0; position: absolute; right:0; top:0; }
+		p { line-height: 16px; margin-bottom: 23px; }
+		/* Modal backdrop - this can be styled however you like */
+		.modal-monitor-backdrop { background: rgba(0,0,0,0.5); bottom: 0; display: none; left: 0; position: fixed; right: 0; text-align: center; top: 0; }
+		/* Modal - these can be styled however you like */
+		.modal-monitor { background: #fff; border-radius: 4px; margin: 80px auto; padding: 20px; position: relative; text-align: left; width: 500px; }
+	</style>
+</head>
+<body>
+	<section class="container">
+		<p style="text-align: center"><i>Copyright</i>, <i>London</i>, <i>William Heinemann</i>, 1904</p>
+		<h2>CHAPTER I</h2>
+		<p>I scarcely know where to begin, though I sometimes facetiously
+		    place the cause of it all to Charley Furuseth’s
+		    credit.&nbsp; He kept a summer cottage in Mill Valley, under the
+		    shadow of Mount Tamalpais, and never occupied it except when he
+		    loafed through the winter months and read Nietzsche and
+		    Schopenhauer to rest his brain.&nbsp; When summer came on, he
+		    elected to sweat out a hot and dusty existence in the city and to
+		    toil incessantly.&nbsp; Had it not been my custom to run up to
+		    see him every Saturday afternoon and to stop over till Monday
+		    morning, this particular January Monday morning would not have
+		    found me afloat on San Francisco Bay.
+		</p>
+		<p>Not but that I was afloat in a safe craft, for the
+		    <i>Martinez</i> was a new ferry-steamer, making her fourth or
+		    fifth trip on the run between Sausalito and San Francisco.&nbsp;
+		    The danger lay in the heavy fog which blanketed the bay, and of
+		    which, as a landsman, I had little apprehension.&nbsp; In fact, I
+		    remember the placid exaltation with which I took up my position
+		    on the forward upper deck, directly beneath the pilot-house, and
+		    allowed the mystery of the fog to lay hold of my
+		    imagination.&nbsp; A fresh breeze was blowing, and for a time I
+		    was alone in the moist obscurity—yet not alone, for I was
+		    dimly conscious of the presence of the pilot, and of what I took
+		    to be the captain, in the glass house above my head.
+		</p>
+		<p>I remember thinking how comfortable it was, this division of
+		    labour which made it unnecessary for me to study fogs, winds,
+		    tides, and navigation, in order to visit my friend who lived
+		    across an arm of the sea.&nbsp; It was good that men should be
+		    specialists, I mused.&nbsp; The peculiar knowledge of the pilot
+		    and captain sufficed for many thousands of people who knew no
+		    more of the sea and navigation than I knew.&nbsp; On the other
+		    hand, instead of having to devote my energy to the learning of a
+		    multitude of things, I concentrated it upon a few particular
+		    things, such as, for instance, the analysis of Poe’s place
+		    in American literature—an essay of mine, by the way, in the
+		    current <i>Atlantic</i>.&nbsp; Coming aboard, as I passed through
+		    the cabin, I had noticed with greedy eyes a stout gentleman
+		    reading the <i>Atlantic</i>, which was open at my very
+		    essay.&nbsp; And there it was again, the division of labour, the
+		    special knowledge of the pilot and captain which permitted the
+		    stout gentleman to read my special knowledge on Poe while they
+		    carried him safely from Sausalito to San Francisco.
+		</p>
+		<p>A red-faced man, slamming the cabin door behind him and
+		    stumping out on the deck, interrupted my reflections, though I
+		    made a mental note of the topic for use in a projected essay
+		    which I had thought of calling “The Necessity for Freedom:
+		    A Plea for the Artist.”&nbsp; The red-faced man shot a
+		    glance up at the pilot-house, gazed around at the fog, stumped
+		    across the deck and back (he evidently had artificial legs), and
+		    stood still by my side, legs wide apart, and with an expression
+		    of keen enjoyment on his face.&nbsp; I was not wrong when I
+		    decided that his days had been spent on the sea.
+		</p>
+		<p>“It’s nasty weather like this here that turns
+		    heads grey before their time,” he said, with a nod toward
+		    the pilot-house.
+		</p>
+		<p>“I had not thought there was any particular
+		    strain,” I answered.&nbsp; “It seems as simple as A,
+		    B, C.&nbsp; They know the direction by compass, the distance, and
+		    the speed.&nbsp; I should not call it anything more than
+		    mathematical certainty.”
+		</p>
+		<p>“Strain!” he snorted.&nbsp; “Simple as A, B,
+		    C!&nbsp; Mathematical certainty!”
+		</p>
+		<p>He seemed to brace himself up and lean backward against the
+		    air as he stared at me.&nbsp; “How about this here tide
+		    that’s rushin’ out through the Golden Gate?” he
+		    demanded, or bellowed, rather.&nbsp; “How fast is she
+		    ebbin’?&nbsp; What’s the drift, eh?&nbsp; Listen to
+		    that, will you?&nbsp; A bell-buoy, and we’re a-top of
+		    it!&nbsp; See ’em alterin’ the course!”
+		</p>
+		<p>From out of the fog came the mournful tolling of a bell, and I
+		    could see the pilot turning the wheel with great rapidity.&nbsp;
+		    The bell, which had seemed straight ahead, was now sounding from
+		    the side.&nbsp; Our own whistle was blowing hoarsely, and from
+		    time to time the sound of other whistles came to us from out of
+		    the fog.
+		</p>
+		<p>“That’s a ferry-boat of some sort,” the
+		    new-comer said, indicating a whistle off to the right.&nbsp;
+		    “And there!&nbsp; D’ye hear that?&nbsp; Blown by
+		    mouth.&nbsp; Some scow schooner, most likely.&nbsp; Better watch
+		    out, Mr. Schooner-man.&nbsp; Ah, I thought so.&nbsp; Now
+		    hell’s a poppin’ for somebody!”
+		</p>
+		<p>The unseen ferry-boat was blowing blast after blast, and the
+		    mouth-blown horn was tooting in terror-stricken fashion.
+		</p>
+		<p>“And now they’re payin’ their respects to
+		    each other and tryin’ to get clear,” the red-faced
+		    man went on, as the hurried whistling ceased.
+		</p>
+		<p>His face was shining, his eyes flashing with excitement as he
+		    translated into articulate language the speech of the horns and
+		    sirens.&nbsp; “That’s a steam-siren a-goin’ it
+		    over there to the left.&nbsp; And you hear that fellow with a
+		    frog in his throat—a steam schooner as near as I can judge,
+		    crawlin’ in from the Heads against the tide.”
+		</p>
+		<p>A shrill little whistle, piping as if gone mad, came from
+		    directly ahead and from very near at hand.&nbsp; Gongs sounded on
+		    the <i>Martinez</i>.&nbsp; Our paddle-wheels stopped, their
+		    pulsing beat died away, and then they started again.&nbsp; The
+		    shrill little whistle, like the chirping of a cricket amid the
+		    cries of great beasts, shot through the fog from more to the side
+		    and swiftly grew faint and fainter.&nbsp; I looked to my
+		    companion for enlightenment.
+		</p>
+		<p>“One of them dare-devil launches,” he said.&nbsp;
+		    “I almost wish we’d sunk him, the little rip!&nbsp;
+		    They’re the cause of more trouble.&nbsp; And what good are
+		    they?&nbsp; Any jackass gets aboard one and runs it from hell to
+		    breakfast, blowin’ his whistle to beat the band and
+		    tellin’ the rest of the world to look out for him, because
+		    he’s comin’ and can’t look out for
+		    himself!&nbsp; Because he’s comin’!&nbsp; And
+		    you’ve got to look out, too!&nbsp; Right of way!&nbsp;
+		    Common decency!&nbsp; They don’t know the meanin’ of
+		    it!”
+		</p>
+		<p>I felt quite amused at his unwarranted choler, and while he
+		    stumped indignantly up and down I fell to dwelling upon the
+		    romance of the fog.&nbsp; And romantic it certainly was—the
+		    fog, like the grey shadow of infinite mystery, brooding over the
+		    whirling speck of earth; and men, mere motes of light and
+		    sparkle, cursed with an insane relish for work, riding their
+		    steeds of wood and steel through the heart of the mystery,
+		    groping their way blindly through the Unseen, and clamouring and
+		    clanging in confident speech the while their hearts are heavy
+		    with incertitude and fear.
+		</p>
+		<p>The voice of my companion brought me back to myself with a
+		    laugh.&nbsp; I too had been groping and floundering, the while I
+		    thought I rode clear-eyed through the mystery.
+		</p>
+		<p>“Hello! somebody comin’ our way,” he was
+		    saying.&nbsp; “And d’ye hear that?&nbsp; He’s
+		    comin’ fast.&nbsp; Walking right along.&nbsp; Guess he
+		    don’t hear us yet.&nbsp; Wind’s in wrong
+		    direction.”
+		</p>
+		<p>The fresh breeze was blowing right down upon us, and I could
+		    hear the whistle plainly, off to one side and a little ahead.
+		</p>
+		<p>“Ferry-boat?” I asked.</p>
+		<p>He nodded, then added, “Or he wouldn’t be
+		    keepin’ up such a clip.”&nbsp; He gave a short
+		    chuckle.&nbsp; “They’re gettin’ anxious up
+		    there.”
+		</p>
+		<p>I glanced up.&nbsp; The captain had thrust his head and
+		    shoulders out of the pilot-house, and was staring intently into
+		    the fog as though by sheer force of will he could penetrate
+		    it.&nbsp; His face was anxious, as was the face of my companion,
+		    who had stumped over to the rail and was gazing with a like
+		    intentness in the direction of the invisible danger.
+		</p>
+		<p>Then everything happened, and with inconceivable
+		    rapidity.&nbsp; The fog seemed to break away as though split by a
+		    wedge, and the bow of a steamboat emerged, trailing fog-wreaths
+		    on either side like seaweed on the snout of Leviathan.&nbsp; I
+		    could see the pilot-house and a white-bearded man leaning partly
+		    out of it, on his elbows.&nbsp; He was clad in a blue uniform,
+		    and I remember noting how trim and quiet he was.&nbsp; His
+		    quietness, under the circumstances, was terrible.&nbsp; He
+		    accepted Destiny, marched hand in hand with it, and coolly
+		    measured the stroke.&nbsp; As he leaned there, he ran a calm and
+		    speculative eye over us, as though to determine the precise point
+		    of the collision, and took no notice whatever when our pilot,
+		    white with rage, shouted, “Now you’ve done
+		    it!”
+		</p>
+		<p>On looking back, I realize that the remark was too obvious to
+		    make rejoinder necessary.
+		</p>
+		<p>“Grab hold of something and hang on,” the
+		    red-faced man said to me.&nbsp; All his bluster had gone, and he
+		    seemed to have caught the contagion of preternatural calm.&nbsp;
+		    “And listen to the women scream,” he said
+		    grimly—almost bitterly, I thought, as though he had been
+		    through the experience before.
+		</p>
+		<p>The vessels came together before I could follow his
+		    advice.&nbsp; We must have been struck squarely amidships, for I
+		    saw nothing, the strange steamboat having passed beyond my line
+		    of vision.&nbsp; The <i>Martinez</i> heeled over, sharply, and
+		    there was a crashing and rending of timber.&nbsp; I was thrown
+		    flat on the wet deck, and before I could scramble to my feet I
+		    heard the scream of the women.&nbsp; This it was, I am
+		    certain,—the most indescribable of blood-curdling
+		    sounds,—that threw me into a panic.&nbsp; I remembered the
+		    life-preservers stored in the cabin, but was met at the door and
+		    swept backward by a wild rush of men and women.&nbsp; What
+		    happened in the next few minutes I do not recollect, though I
+		    have a clear remembrance of pulling down life-preservers from the
+		    overhead racks, while the red-faced man fastened them about the
+		    bodies of an hysterical group of women.&nbsp; This memory is as
+		    distinct and sharp as that of any picture I have seen.&nbsp; It
+		    is a picture, and I can see it now,—the jagged edges of the
+		    hole in the side of the cabin, through which the grey fog swirled
+		    and eddied; the empty upholstered seats, littered with all the
+		    evidences of sudden flight, such as packages, hand satchels,
+		    umbrellas, and wraps; the stout gentleman who had been reading my
+		    essay, encased in cork and canvas, the magazine still in his
+		    hand, and asking me with monotonous insistence if I thought there
+		    was any danger; the red-faced man, stumping gallantly around on
+		    his artificial legs and buckling life-preservers on all comers;
+		    and finally, the screaming bedlam of women.
+		</p>
+		<p>This it was, the screaming of the women, that most tried my
+		    nerves.&nbsp; It must have tried, too, the nerves of the
+		    red-faced man, for I have another picture which will never fade
+		    from my mind.&nbsp; The stout gentleman is stuffing the magazine
+		    into his overcoat pocket and looking on curiously.&nbsp; A
+		    tangled mass of women, with drawn, white faces and open mouths,
+		    is shrieking like a chorus of lost souls; and the red-faced man,
+		    his face now purplish with wrath, and with arms extended overhead
+		    as in the act of hurling thunderbolts, is shouting, “Shut
+		    up!&nbsp; Oh, shut up!”
+		</p>
+		<p>I remember the scene impelled me to sudden laughter, and in
+		    the next instant I realized I was becoming hysterical myself; for
+		    these were women of my own kind, like my mother and sisters, with
+		    the fear of death upon them and unwilling to die.&nbsp; And I
+		    remember that the sounds they made reminded me of the squealing
+		    of pigs under the knife of the butcher, and I was struck with
+		    horror at the vividness of the analogy.&nbsp; These women,
+		    capable of the most sublime emotions, of the tenderest
+		    sympathies, were open-mouthed and screaming.&nbsp; They wanted to
+		    live, they were helpless, like rats in a trap, and they
+		    screamed.
+		</p>
+		<p>The horror of it drove me out on deck.&nbsp; I was feeling
+		    sick and squeamish, and sat down on a bench.&nbsp; In a hazy way
+		    I saw and heard men rushing and shouting as they strove to lower
+		    the boats.&nbsp; It was just as I had read descriptions of such
+		    scenes in books.&nbsp; The tackles jammed.&nbsp; Nothing
+		    worked.&nbsp; One boat lowered away with the plugs out, filled
+		    with women and children and then with water, and capsized.&nbsp;
+		    Another boat had been lowered by one end, and still hung in the
+		    tackle by the other end, where it had been abandoned.&nbsp;
+		    Nothing was to be seen of the strange steamboat which had caused
+		    the disaster, though I heard men saying that she would
+		    undoubtedly send boats to our assistance.
+		</p>
+		<p>I descended to the lower deck.&nbsp; The <i>Martinez</i> was
+		    sinking fast, for the water was very near.&nbsp; Numbers of the
+		    passengers were leaping overboard.&nbsp; Others, in the water,
+		    were clamouring to be taken aboard again.&nbsp; No one heeded
+		    them.&nbsp; A cry arose that we were sinking.&nbsp; I was seized
+		    by the consequent panic, and went over the side in a surge of
+		    bodies.&nbsp; How I went over I do not know, though I did know,
+		    and instantly, why those in the water were so desirous of getting
+		    back on the steamer.&nbsp; The water was cold—so cold that
+		    it was painful.&nbsp; The pang, as I plunged into it, was as
+		    quick and sharp as that of fire.&nbsp; It bit to the
+		    marrow.&nbsp; It was like the grip of death.&nbsp; I gasped with
+		    the anguish and shock of it, filling my lungs before the
+		    life-preserver popped me to the surface.&nbsp; The taste of the
+		    salt was strong in my mouth, and I was strangling with the acrid
+		    stuff in my throat and lungs.
+		</p>
+		<p>But it was the cold that was most distressing.&nbsp; I felt
+		    that I could survive but a few minutes.&nbsp; People were
+		    struggling and floundering in the water about me.&nbsp; I could
+		    hear them crying out to one another.&nbsp; And I heard, also, the
+		    sound of oars.&nbsp; Evidently the strange steamboat had lowered
+		    its boats.&nbsp; As the time went by I marvelled that I was still
+		    alive.&nbsp; I had no sensation whatever in my lower limbs, while
+		    a chilling numbness was wrapping about my heart and creeping into
+		    it.&nbsp; Small waves, with spiteful foaming crests, continually
+		    broke over me and into my mouth, sending me off into more
+		    strangling paroxysms.
+		</p>
+		<p>The noises grew indistinct, though I heard a final and
+		    despairing chorus of screams in the distance, and knew that the
+		    <i>Martinez</i> had gone down.&nbsp; Later,—how much later
+		    I have no knowledge,—I came to myself with a start of
+		    fear.&nbsp; I was alone.&nbsp; I could hear no calls or
+		    cries—only the sound of the waves, made weirdly hollow and
+		    reverberant by the fog.&nbsp; A panic in a crowd, which partakes
+		    of a sort of community of interest, is not so terrible as a panic
+		    when one is by oneself; and such a panic I now suffered.&nbsp;
+		    Whither was I drifting?&nbsp; The red-faced man had said that the
+		    tide was ebbing through the Golden Gate.&nbsp; Was I, then, being
+		    carried out to sea?&nbsp; And the life-preserver in which I
+		    floated?&nbsp; Was it not liable to go to pieces at any
+		    moment?&nbsp; I had heard of such things being made of paper and
+		    hollow rushes which quickly became saturated and lost all
+		    buoyancy.&nbsp; And I could not swim a stroke.&nbsp; And I was
+		    alone, floating, apparently, in the midst of a grey primordial
+		    vastness.&nbsp; I confess that a madness seized me, that I
+		    shrieked aloud as the women had shrieked, and beat the water with
+		    my numb hands.
+		</p>
+		<p>How long this lasted I have no conception, for a blankness
+		    intervened, of which I remember no more than one remembers of
+		    troubled and painful sleep.&nbsp; When I aroused, it was as after
+		    centuries of time; and I saw, almost above me and emerging from
+		    the fog, the bow of a vessel, and three triangular sails, each
+		    shrewdly lapping the other and filled with wind.&nbsp; Where the
+		    bow cut the water there was a great foaming and gurgling, and I
+		    seemed directly in its path.&nbsp; I tried to cry out, but was
+		    too exhausted.&nbsp; The bow plunged down, just missing me and
+		    sending a swash of water clear over my head.&nbsp; Then the long,
+		    black side of the vessel began slipping past, so near that I
+		    could have touched it with my hands.&nbsp; I tried to reach it,
+		    in a mad resolve to claw into the wood with my nails, but my arms
+		    were heavy and lifeless.&nbsp; Again I strove to call out, but
+		    made no sound.
+		</p>
+		<p>The stern of the vessel shot by, dropping, as it did so, into
+		    a hollow between the waves; and I caught a glimpse of a man
+		    standing at the wheel, and of another man who seemed to be doing
+		    little else than smoke a cigar.&nbsp; I saw the smoke issuing
+		    from his lips as he slowly turned his head and glanced out over
+		    the water in my direction.&nbsp; It was a careless,
+		    unpremeditated glance, one of those haphazard things men do when
+		    they have no immediate call to do anything in particular, but act
+		    because they are alive and must do something.
+		</p>
+		<p>But life and death were in that glance.&nbsp; I could see the
+		    vessel being swallowed up in the fog; I saw the back of the man
+		    at the wheel, and the head of the other man turning, slowly
+		    turning, as his gaze struck the water and casually lifted along
+		    it toward me.&nbsp; His face wore an absent expression, as of
+		    deep thought, and I became afraid that if his eyes did light upon
+		    me he would nevertheless not see me.&nbsp; But his eyes did light
+		    upon me, and looked squarely into mine; and he did see me, for he
+		    sprang to the wheel, thrusting the other man aside, and whirled
+		    it round and round, hand over hand, at the same time shouting
+		    orders of some sort.&nbsp; The vessel seemed to go off at a
+		    tangent to its former course and leapt almost instantly from view
+		    into the fog.
+		</p>
+		<p>I felt myself slipping into unconsciousness, and tried with
+		    all the power of my will to fight above the suffocating blankness
+		    and darkness that was rising around me.&nbsp; A little later I
+		    heard the stroke of oars, growing nearer and nearer, and the
+		    calls of a man.&nbsp; When he was very near I heard him crying,
+		    in vexed fashion, “Why in hell don’t you sing
+		    out?”&nbsp; This meant me, I thought, and then the
+		    blankness and darkness rose over me.
+		</p>
+		<h2>CHAPTER II</h2>
+		<p>I seemed swinging in a mighty rhythm through orbit
+		    vastness.&nbsp; Sparkling points of light spluttered and shot
+		    past me.&nbsp; They were stars, I knew, and flaring comets, that
+		    peopled my flight among the suns.&nbsp; As I reached the limit of
+		    my swing and prepared to rush back on the counter swing, a great
+		    gong struck and thundered.&nbsp; For an immeasurable period,
+		    lapped in the rippling of placid centuries, I enjoyed and
+		    pondered my tremendous flight.
+		</p>
+		<p>But a change came over the face of the dream, for a dream I
+		    told myself it must be.&nbsp; My rhythm grew shorter and
+		    shorter.&nbsp; I was jerked from swing to counter swing with
+		    irritating haste.&nbsp; I could scarcely catch my breath, so
+		    fiercely was I impelled through the heavens.&nbsp; The gong
+		    thundered more frequently and more furiously.&nbsp; I grew to
+		    await it with a nameless dread.&nbsp; Then it seemed as though I
+		    were being dragged over rasping sands, white and hot in the
+		    sun.&nbsp; This gave place to a sense of intolerable
+		    anguish.&nbsp; My skin was scorching in the torment of
+		    fire.&nbsp; The gong clanged and knelled.&nbsp; The sparkling
+		    points of light flashed past me in an interminable stream, as
+		    though the whole sidereal system were dropping into the
+		    void.&nbsp; I gasped, caught my breath painfully, and opened my
+		    eyes.&nbsp; Two men were kneeling beside me, working over
+		    me.&nbsp; My mighty rhythm was the lift and forward plunge of a
+		    ship on the sea.&nbsp; The terrific gong was a frying-pan,
+		    hanging on the wall, that rattled and clattered with each leap of
+		    the ship.&nbsp; The rasping, scorching sands were a man’s
+		    hard hands chafing my naked chest.&nbsp; I squirmed under the
+		    pain of it, and half lifted my head.&nbsp; My chest was raw and
+		    red, and I could see tiny blood globules starting through the
+		    torn and inflamed cuticle.
+		</p>
+		<p>“That’ll do, Yonson,” one of the men
+		    said.&nbsp; “Carn’t yer see you’ve
+		    bloomin’ well rubbed all the gent’s skin
+		    orf?”
+		</p>
+		<p>The man addressed as Yonson, a man of the heavy Scandinavian
+		    type, ceased chafing me, and arose awkwardly to his feet.&nbsp;
+		    The man who had spoken to him was clearly a Cockney, with the
+		    clean lines and weakly pretty, almost effeminate, face of the man
+		    who has absorbed the sound of Bow Bells with his mother’s
+		    milk.&nbsp; A draggled muslin cap on his head and a dirty
+		    gunny-sack about his slim hips proclaimed him cook of the
+		    decidedly dirty ship’s galley in which I found myself.
+		</p>
+		<p>“An’ ’ow yer feelin’ now, sir?”
+		    he asked, with the subservient smirk which comes only of
+		    generations of tip-seeking ancestors.
+		</p>
+		<p>For reply, I twisted weakly into a sitting posture, and was
+		    helped by Yonson to my feet.&nbsp; The rattle and bang of the
+		    frying-pan was grating horribly on my nerves.&nbsp; I could not
+		    collect my thoughts.&nbsp; Clutching the woodwork of the galley
+		    for support,—and I confess the grease with which it was
+		    scummed put my teeth on edge,—I reached across a hot
+		    cooking-range to the offending utensil, unhooked it, and wedged
+		    it securely into the coal-box.
+		</p>
+		<p>The cook grinned at my exhibition of nerves, and thrust into
+		    my hand a steaming mug with an “’Ere, this’ll
+		    do yer good.”&nbsp; It was a nauseous
+		    mess,—ship’s coffee,—but the heat of it was
+		    revivifying.&nbsp; Between gulps of the molten stuff I glanced
+		    down at my raw and bleeding chest and turned to the
+		    Scandinavian.
+		</p>
+		<p>“Thank you, Mr. Yonson,” I said; “but
+		    don’t you think your measures were rather
+		    heroic?”
+		</p>
+		<p>It was because he understood the reproof of my action, rather
+		    than of my words, that he held up his palm for inspection.&nbsp;
+		    It was remarkably calloused.&nbsp; I passed my hand over the
+		    horny projections, and my teeth went on edge once more from the
+		    horrible rasping sensation produced.
+		</p>
+		<p>“My name is Johnson, not Yonson,” he said, in very
+		    good, though slow, English, with no more than a shade of accent
+		    to it.
+		</p>
+		<p>There was mild protest in his pale blue eyes, and withal a
+		    timid frankness and manliness that quite won me to him.
+		</p>
+		<p>“Thank you, Mr. Johnson,” I corrected, and reached
+		    out my hand for his.
+		</p>
+		<p>He hesitated, awkward and bashful, shifted his weight from one
+		    leg to the other, then blunderingly gripped my hand in a hearty
+		    shake.
+		</p>
+		<p>“Have you any dry clothes I may put on?” I asked
+		    the cook.
+		</p>
+		<p>“Yes, sir,” he answered, with cheerful
+		    alacrity.&nbsp; “I’ll run down an’ tyke a look
+		    over my kit, if you’ve no objections, sir, to wearin’
+		    my things.”
+		</p>
+		<p>He dived out of the galley door, or glided rather, with a
+		    swiftness and smoothness of gait that struck me as being not so
+		    much cat-like as oily.&nbsp; In fact, this oiliness, or
+		    greasiness, as I was later to learn, was probably the most
+		    salient expression of his personality.
+		</p>
+		<p>“And where am I?” I asked Johnson, whom I took,
+		    and rightly, to be one of the sailors.&nbsp; “What vessel
+		    is this, and where is she bound?”
+		</p>
+		<p>“Off the Farallones, heading about sou-west,” he
+		    answered, slowly and methodically, as though groping for his best
+		    English, and rigidly observing the order of my queries.&nbsp;
+		    “The schooner <i>Ghost</i>, bound seal-hunting to
+		    Japan.”
+		</p>
+		<p>“And who is the captain?&nbsp; I must see him as soon as
+		    I am dressed.”
+		</p>
+		<p>Johnson looked puzzled and embarrassed.&nbsp; He hesitated
+		    while he groped in his vocabulary and framed a complete
+		    answer.&nbsp; “The cap’n is Wolf Larsen, or so men
+		    call him.&nbsp; I never heard his other name.&nbsp; But you
+		    better speak soft with him.&nbsp; He is mad this morning.&nbsp;
+		    The mate—”
+		</p>
+		<p>But he did not finish.&nbsp; The cook had glided in.</p>
+		<p>“Better sling yer ’ook out of ’ere,
+		    Yonson,” he said.&nbsp; “The old man’ll be
+		    wantin’ yer on deck, an’ this ayn’t no
+		    d’y to fall foul of ’im.”
+		</p>
+		<p>Johnson turned obediently to the door, at the same time, over
+		    the cook’s shoulder, favouring me with an amazingly solemn
+		    and portentous wink as though to emphasize his interrupted remark
+		    and the need for me to be soft-spoken with the captain.
+		</p>
+		<p>Hanging over the cook’s arm was a loose and crumpled
+		    array of evil-looking and sour-smelling garments.
+		</p>
+		<p>“They was put aw’y wet, sir,” he vouchsafed
+		    explanation.&nbsp; “But you’ll ’ave to make
+		    them do till I dry yours out by the fire.”
+		</p>
+		<p>Clinging to the woodwork, staggering with the roll of the
+		    ship, and aided by the cook, I managed to slip into a rough
+		    woollen undershirt.&nbsp; On the instant my flesh was creeping
+		    and crawling from the harsh contact.&nbsp; He noticed my
+		    involuntary twitching and grimacing, and smirked:
+		</p>
+		<p>“I only ’ope yer don’t ever ’ave to
+		    get used to such as that in this life, ’cos you’ve
+		    got a bloomin’ soft skin, that you ’ave, more like a
+		    lydy’s than any I know of.&nbsp; I was bloomin’ well
+		    sure you was a gentleman as soon as I set eyes on yer.”
+		</p>
+		<p>I had taken a dislike to him at first, and as he helped to
+		    dress me this dislike increased.&nbsp; There was something
+		    repulsive about his touch.&nbsp; I shrank from his hand; my flesh
+		    revolted.&nbsp; And between this and the smells arising from
+		    various pots boiling and bubbling on the galley fire, I was in
+		    haste to get out into the fresh air.&nbsp; Further, there was the
+		    need of seeing the captain about what arrangements could be made
+		    for getting me ashore.
+		</p>
+		<p>A cheap cotton shirt, with frayed collar and a bosom
+		    discoloured with what I took to be ancient blood-stains, was put
+		    on me amid a running and apologetic fire of comment.&nbsp; A pair
+		    of workman’s brogans encased my feet, and for trousers I
+		    was furnished with a pair of pale blue, washed-out overalls, one
+		    leg of which was fully ten inches shorter than the other.&nbsp;
+		    The abbreviated leg looked as though the devil had there clutched
+		    for the Cockney’s soul and missed the shadow for the
+		    substance.
+		</p>
+		<p>“And whom have I to thank for this kindness?” I
+		    asked, when I stood completely arrayed, a tiny boy’s cap on
+		    my head, and for coat a dirty, striped cotton jacket which ended
+		    at the small of my back and the sleeves of which reached just
+		    below my elbows.
+		</p>
+		<p>The cook drew himself up in a smugly humble fashion, a
+		    deprecating smirk on his face.&nbsp; Out of my experience with
+		    stewards on the Atlantic liners at the end of the voyage, I could
+		    have sworn he was waiting for his tip.&nbsp; From my fuller
+		    knowledge of the creature I now know that the posture was
+		    unconscious.&nbsp; An hereditary servility, no doubt, was
+		    responsible.
+		</p>
+		<p>“Mugridge, sir,” he fawned, his effeminate
+		    features running into a greasy smile.&nbsp; “Thomas
+		    Mugridge, sir, an’ at yer service.”
+		</p>
+		<p>“All right, Thomas,” I said.&nbsp; “I shall
+		    not forget you—when my clothes are dry.”
+		</p>
+		<p>A soft light suffused his face and his eyes glistened, as
+		    though somewhere in the deeps of his being his ancestors had
+		    quickened and stirred with dim memories of tips received in
+		    former lives.
+		</p>
+		<p>“Thank you, sir,” he said, very gratefully and
+		    very humbly indeed.
+		</p>
+		<p>Precisely in the way that the door slid back, he slid aside,
+		    and I stepped out on deck.&nbsp; I was still weak from my
+		    prolonged immersion.&nbsp; A puff of wind caught me,—and I
+		    staggered across the moving deck to a corner of the cabin, to
+		    which I clung for support.&nbsp; The schooner, heeled over far
+		    out from the perpendicular, was bowing and plunging into the long
+		    Pacific roll.&nbsp; If she were heading south-west as Johnson had
+		    said, the wind, then, I calculated, was blowing nearly from the
+		    south.&nbsp; The fog was gone, and in its place the sun sparkled
+		    crisply on the surface of the water, I turned to the east, where
+		    I knew California must lie, but could see nothing save low-lying
+		    fog-banks—the same fog, doubtless, that had brought about
+		    the disaster to the <i>Martinez</i> and placed me in my present
+		    situation.&nbsp; To the north, and not far away, a group of naked
+		    rocks thrust above the sea, on one of which I could distinguish a
+		    lighthouse.&nbsp; In the south-west, and almost in our course, I
+		    saw the pyramidal loom of some vessel’s sails.
+		</p>
+		<p>Having completed my survey of the horizon, I turned to my more
+		    immediate surroundings.&nbsp; My first thought was that a man who
+		    had come through a collision and rubbed shoulders with death
+		    merited more attention than I received.&nbsp; Beyond a sailor at
+		    the wheel who stared curiously across the top of the cabin, I
+		    attracted no notice whatever.
+		</p>
+		<p>Everybody seemed interested in what was going on amid
+		    ships.&nbsp; There, on a hatch, a large man was lying on his
+		    back.&nbsp; He was fully clothed, though his shirt was ripped
+		    open in front.&nbsp; Nothing was to be seen of his chest,
+		    however, for it was covered with a mass of black hair, in
+		    appearance like the furry coat of a dog.&nbsp; His face and neck
+		    were hidden beneath a black beard, intershot with grey, which
+		    would have been stiff and bushy had it not been limp and draggled
+		    and dripping with water.&nbsp; His eyes were closed, and he was
+		    apparently unconscious; but his mouth was wide open, his breast,
+		    heaving as though from suffocation as he laboured noisily for
+		    breath.&nbsp; A sailor, from time to time and quite methodically,
+		    as a matter of routine, dropped a canvas bucket into the ocean at
+		    the end of a rope, hauled it in hand under hand, and sluiced its
+		    contents over the prostrate man.
+		</p>
+		<p>Pacing back and forth the length of the hatchways and savagely
+		    chewing the end of a cigar, was the man whose casual glance had
+		    rescued me from the sea.&nbsp; His height was probably five feet
+		    ten inches, or ten and a half; but my first impression, or feel
+		    of the man, was not of this, but of his strength.&nbsp; And yet,
+		    while he was of massive build, with broad shoulders and deep
+		    chest, I could not characterize his strength as massive.&nbsp; It
+		    was what might be termed a sinewy, knotty strength, of the kind
+		    we ascribe to lean and wiry men, but which, in him, because of
+		    his heavy build, partook more of the enlarged gorilla
+		    order.&nbsp; Not that in appearance he seemed in the least
+		    gorilla-like.&nbsp; What I am striving to express is this
+		    strength itself, more as a thing apart from his physical
+		    semblance.&nbsp; It was a strength we are wont to associate with
+		    things primitive, with wild animals, and the creatures we imagine
+		    our tree-dwelling prototypes to have been—a strength
+		    savage, ferocious, alive in itself, the essence of life in that
+		    it is the potency of motion, the elemental stuff itself out of
+		    which the many forms of life have been moulded; in short, that
+		    which writhes in the body of a snake when the head is cut off,
+		    and the snake, as a snake, is dead, or which lingers in the
+		    shapeless lump of turtle-meat and recoils and quivers from the
+		    prod of a finger.
+		</p>
+	</section>
+	<div class="modal-monitor-backdrop">
+		<div id="scrollbottom" class="modal-monitor" data-method="scroll" data-trigger="bottom">You scrolled to the bottom of the page</div>
+		<div id="timed3000" class="modal-monitor" data-method="timed" data-trigger="3000">Timed modal after 3 seconds</div>
+		<div id="timed10000" class="modal-monitor" data-method="timed" data-trigger="10000">Timed modal after 10 seconds</div>
+	</div>
+	<script type="text/javascript" src="modalmonitor.js"></script>
+	<script>
+		MODAL.Monitor.init();
+	</script>
+</body>
+</html>
