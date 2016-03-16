@@ -148,12 +148,17 @@ window.MODAL.Monitor = function () {
 			// initialize modal monitor for all elements with class="modal-monitor"
 			var modals = $('.modal-monitor');
 			Array.prototype.forEach.call(modals, function(el){
+				// Prevent clicks on modal from bubbling up
+				el.onclick = function(e) { 
+					e.stopPropagation(); 
+				};
+				// Set everything up
 				initModalMonitor(el);
 			});
 			// Add click event on backdrop to close modals
-			$('.modal-monitor-backdrop')[0].addEventListener('click', function() {
+			$('.modal-monitor-backdrop')[0].onclick = function() {
   				window.MODAL.Monitor.hide();
-  			});
+  			};
 		},
 		conversion: function(id) {
 			id = hexRemoval(id);
