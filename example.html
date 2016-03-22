@@ -11,9 +11,9 @@
 		h2 { margin-bottom: 46px; text-align: center; }
 		.modal-backdrop { background: rgba(0,0,0,0.7); bottom: 0; display: none; left: 0; position: absolute; right:0; top:0; }
 		p { line-height: 16px; margin-bottom: 23px; }
-		/* Modal backdrop - this can be styled however you like */
+		/* Modal backdrop - this can be styled however you'd like */
 		.modal-monitor-backdrop { background: rgba(0,0,0,0.5); bottom: 0; display: none; left: 0; position: fixed; right: 0; text-align: center; top: 0; }
-		/* Modal - these can be styled however you like */
+		/* Modal - these can be styled however you'd like */
 		.modal-monitor { background: #fff; border-radius: 4px; margin: 80px auto; padding: 20px; position: relative; text-align: left; width: 500px; }
 	</style>
 </head>
@@ -648,7 +648,20 @@
 	</div>
 	<script type="text/javascript" src="modalmonitor.js"></script>
 	<script>
-		MODAL.Monitor.init();
+		MODAL.Monitor.init({
+			"modalBackdropClass" : ".modal-monitor-backdrop",
+			"modalClass" : ".modal-monitor",
+			"cssTransitions" : {
+				"used" : "false",
+				"class" : "show",
+				"delay" : "300"
+			},
+			"frequencyDefault" : "1",
+			"cookieNames" : {
+				"default" : "conversion-false",
+				"conversion" : "conversion-true"
+			}
+		});
 	</script>
 </body>
 </html>

@@ -70,9 +70,28 @@ Check out example.html for more examples.
 
 **init()**
 
-Init kicks everything off. It searched for any element with the class of `.modal-monitor` and sets everything up
+Init kicks everything off. You can pass a number of custom options which are outlined below:
 
-Example usage: `MODAL.Monitor.init();`
+Example usage:
+
+```
+<script>
+		MODAL.Monitor.init({
+			"modalBackdropClass" : ".modal-monitor-backdrop", //CSS class of modal backdrop
+			"modalClass" : ".modal-monitor", //CSS class of modal
+			"cssTransitions" : {
+				"used" : "false", //false, or true (change to true to turn CSS transitions on)
+				"class" : "show", //This class name will be added to .modal-monitor-backdrop to trigger the CSS transition
+				"delay" : "300" //When the modal is closed, the class name above will removed after this many ms
+			},
+			"frequencyDefault" : "1", //Default for cookie length
+			"cookieNames" : {
+				"default" : "conversion-false", //Default (non-conversion) cookie name
+				"conversion" : "conversion-true" //Conversion cookie name
+			}
+		});
+	</script>
+```
 
 **conversion()**
 

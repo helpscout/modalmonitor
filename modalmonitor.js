@@ -6,11 +6,10 @@ if ( !window.MODAL ) { window.MODAL = {}; }
 
 window.MODAL.Monitor = function () {
 
-	// Are you using a CSS transition?
-	var cssTransition = {};
-		cssTransition.used = true; // false, or true (change to true to turn CSS transitions on)
-		cssTransition.class = 'show'; // This class name will be added to .modal-monitor-backdrop
-		cssTransition.delay = 300; // When the modal is closed, the class name above will removed after this many ms
+	// Global settings
+	var settings = {};
+		settings.cookieNames = {};
+		settings.cssTransitions = {};
 
 	// Bare bones simulation of jQuery-like query selector
 	function $(el) {
@@ -19,7 +18,7 @@ window.MODAL.Monitor = function () {
 
 	// Add conversion (as a result, the modal will no longer be shown)
 	function addConversion(id) {
-		cookieSet(id,'conversion-true',10000);
+		cookieSet(id,settings.cookieNames.conversion,10000);
 	}
 
 	// Add cookie
@@ -77,21 +76,21 @@ window.MODAL.Monitor = function () {
 
 	// Hides modal backdrop, and all modals
 	function hideModal() {
-		var modalMonitorBackdrop = $('.modal-monitor-backdrop')[0];
+		var modalMonitorBackdrop = $(settings.modalBackdropClass)[0];
 		// Check to see if CSS transitions is on
-		if (cssTransition.used) {
+		if (settings.cssTransitions.used) {
 			var timer = true;
 			// Check to see if browser supports classList
 			if (modalMonitorBackdrop.classList) {
-  				modalMonitorBackdrop.classList.remove(cssTransition.class);
+  				modalMonitorBackdrop.classList.remove(settings.cssTransitions.class);
 			} else {
-				modalMonitorBackdrop.className = modalMonitorBackdrop.className.replace(cssTransition.class, '');
+				modalMonitorBackdrop.className = modalMonitorBackdrop.className.replace(settings.cssTransitions.class, '');
 			}
 			clearTimeout(timer);
 			timer = setTimeout(function () {
 				modalMonitorBackdrop.style.display = 'none';
 				hideAllModals();
-			}, cssTransition.delay);
+			}, settings.cssTransitions.delay);
 		} else {
 			modalMonitorBackdrop.style.display = 'none';
 			hideAllModals();
@@ -100,7 +99,7 @@ window.MODAL.Monitor = function () {
 
 	// Loops through, and hides all modals
 	function hideAllModals() {
-		var modals = $('.modal-monitor');
+		var modals = $(settings.modalClass);
 		Array.prototype.forEach.call(modals, function(el){
 			el.style.display = 'none';
 		});
@@ -139,7 +138,7 @@ window.MODAL.Monitor = function () {
 
 	// Show a specific modal
 	function showModal(el) {
-		var modalMonitorBackdrop = $('.modal-monitor-backdrop')[0],
+		var modalMonitorBackdrop = $(settings.modalBackdropClass)[0],
 			thisId = el.getAttribute('id'),
 			thisCookie = cookieGet(thisId),
 			timer = 0;
@@ -149,7 +148,7 @@ window.MODAL.Monitor = function () {
 		}
 		// Check for conversions
 		// If they've already converted', never show this modal again
-		if (thisCookie && 'conversion-true' === thisCookie) {
+		if (thisCookie && settings.cookieNames.conversion === thisCookie) {
 			return false;
 		}
 		// If cookie is already set, return false
@@ -158,7 +157,7 @@ window.MODAL.Monitor = function () {
 		}
 		// No cookie is set
 		// Add cookie for frequency specified (default is 30 days if no frequency is set)
-		cookieSet(thisId,'conversion-false',data(el, 'frequency') || 30);
+		cookieSet(thisId,settings.cookieNames.default,data(el, 'frequency') || settings.frequencyDefault);
 		// Show the backdrop
 		modalMonitorBackdrop.style.display = 'block';
 		// Hide all other modals
@@ -166,14 +165,14 @@ window.MODAL.Monitor = function () {
 		// Then show this modal
 		el.style.display = 'block';
 		// Check to see if CSS transitions is on
-		if (cssTransition.used) {
+		if (settings.cssTransitions.used) {
 			clearTimeout(timer);
 			timer = setTimeout(function () {
 				// Check to see if browser supports classList
 				if (modalMonitorBackdrop.classList) {
-	  				modalMonitorBackdrop.classList.add(cssTransition.class);
+	  				modalMonitorBackdrop.classList.add(settings.cssTransitions.class);
 				} else {
-					modalMonitorBackdrop.className += ' ' + cssTransition.class;
+					modalMonitorBackdrop.className += ' ' + settings.cssTransitions.class;
 				}
 			}, 100);
 		}
@@ -181,9 +180,27 @@ window.MODAL.Monitor = function () {
 
 	// Public facing methods
 	return {
-		init: function() {
+		init: function(options) {
+			// Default settings
+			// CSS class of modal backdrop
+			settings.modalBackdropClass = (typeof options.modalBackdropClass === 'undefined') ? '.modal-monitor-backdrop' : options.modalBackdropClass;
+			// CSS class of modal
+			settings.modalClass = (typeof options.modalClass === 'undefined') ? '.modal-monitor' : options.modalClass;
+			// false, or true (change to true to turn CSS transitions on)
+			settings.cssTransitions.used = (typeof options.cssTransitions.used === 'undefined') ? 'false' : options.cssTransitions.used;
+			// This class name will be added to .modal-monitor-backdrop
+			settings.cssTransitions.class = (typeof options.cssTransitions.class === 'undefined') ? 'show' : options.cssTransitions.class;
+			// When the modal is closed, the class name above will removed after this many ms
+			settings.cssTransitions.delay = (typeof options.cssTransitions.delay === 'undefined') ? '300' : options.cssTransitions.delay;
+			// Default for cookie length
+			settings.frequencyDefault = (typeof options.frequencyDefault === 'undefined') ? '30' : options.frequencyDefault;
+			// Default (non-conversion) cookie name
+			settings.cookieNames.default = (typeof options.cookieNames.default === 'undefined') ? 'conversion-false' : options.cookieNames.default;
+			// Conversion cookie name
+			settings.cookieNames.conversion = (typeof options.cookieNames.conversion === 'undefined') ? 'conversion-true' : options.cookieNames.conversion;
+
 			// initialize modal monitor for all elements with class="modal-monitor"
-			var modals = $('.modal-monitor');
+			var modals = $(settings.modalClass);
 			Array.prototype.forEach.call(modals, function(el){
 				// Prevent clicks on modal from bubbling up
 				el.onclick = function(e) { 
@@ -193,7 +210,7 @@ window.MODAL.Monitor = function () {
 				initModalMonitor(el);
 			});
 			// Add click event on backdrop to close modals
-			$('.modal-monitor-backdrop')[0].onclick = function() {
+			$(settings.modalBackdropClass)[0].onclick = function() {
   				window.MODAL.Monitor.hide();
   			};
 		},
