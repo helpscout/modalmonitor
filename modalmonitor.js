@@ -7,7 +7,8 @@ if ( !window.MODAL ) { window.MODAL = {}; }
 window.MODAL.Monitor = function () {
 
 	// Global settings
-	var settings = {};
+	var abort = false,
+		settings = {};
 		settings.cookieNames = {};
 		settings.cssTransitions = {};
 
@@ -107,8 +108,10 @@ window.MODAL.Monitor = function () {
 
 	// Kicks everything off
 	function initModalMonitor(el) {
+		if (abort) {
+			return false;
+		}
 		// Grab data attributes on modal container
-		var settings = {};
 			settings.frequency = data(el, 'frequency') || 30;
 			settings.method = data(el, 'method');
 			settings.trigger = data(el, 'trigger');
@@ -129,15 +132,18 @@ window.MODAL.Monitor = function () {
 		// Timed method
 		} else if ('timed' === settings.method) {
 			var modalTimeout = '';
-				clearTimeout(modalTimeout);
-				modalTimeout = setTimeout(function() {
-					showModal(el);
-				}, parseInt(settings.trigger));
+			clearTimeout(modalTimeout);
+			modalTimeout = setTimeout(function() {
+				showModal(el);
+			}, parseInt(settings.trigger));
 		}
 	}
 
 	// Show a specific modal
 	function showModal(el) {
+		if (abort) {
+			return false;
+		}
 		var modalMonitorBackdrop = $(settings.modalBackdropClass)[0],
 			thisId = el.getAttribute('id'),
 			thisCookie = cookieGet(thisId),
@@ -213,6 +219,9 @@ window.MODAL.Monitor = function () {
 			$(settings.modalBackdropClass)[0].onclick = function() {
   				window.MODAL.Monitor.hide();
   			};
+		},
+		abort: function() {
+			abort = true;
 		},
 		conversion: function(id) {
 			id = hexRemoval(id);

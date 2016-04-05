@@ -93,6 +93,12 @@ Example usage:
 	</script>
 ```
 
+**abort()**
+
+If you wish to abort all modals, and prevent any popups from auto-matically showing, use this method.
+
+Example usage: `MODAL.Monitor.abort();`
+
 **conversion()**
 
 Add a conversion for a specific modal based on the id you give it. Once a modal has a conversion, it will not be shown again no matter the frequency that is set.
