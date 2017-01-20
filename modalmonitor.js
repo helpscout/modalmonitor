@@ -112,30 +112,38 @@ window.MODAL.Monitor = function () {
 			return false;
 		}
 		// Grab data attributes on modal container
-			settings.frequency = data(el, 'frequency') || 30;
-			settings.method = data(el, 'method');
-			settings.trigger = data(el, 'trigger');
+			var thisId = el.getAttribute('id');
+			settings[thisId] = {};
+			settings[thisId].method = data(el, 'method');
+			settings[thisId].trigger = data(el, 'trigger');
 		// Scrolling method
-		if ('scroll' === settings.method) {
+		if ('scroll' === settings[thisId].method) {
 			var bodyHeight = document.body.offsetHeight,
 				middle = parseInt(bodyHeight/2),
 				bottom = parseInt(bodyHeight-[bodyHeight*0.15]);
 			document.addEventListener('scroll', debounce(function() {
-				var scrolled = document.body.scrollTop;
-				if ('middle' === settings.trigger && middle < scrolled) {
-					showModal(el);
+				var scrolled = parseInt(document.body.scrollTop);
+				if ('middle' === settings[thisId].trigger && middle < scrolled) {
+					return showModal(el);
 				}
-				if ('bottom' === settings.trigger && bottom < scrolled) {
-					showModal(el);
+				if ('bottom' === settings[thisId].trigger && bottom < scrolled) {
+					return showModal(el);
 				}
 			}, 300));
 		// Timed method
-		} else if ('timed' === settings.method) {
+		} else if ('timed' === settings[thisId].method) {
 			var modalTimeout = '';
 			clearTimeout(modalTimeout);
 			modalTimeout = setTimeout(function() {
-				showModal(el);
-			}, parseInt(settings.trigger));
+				return showModal(el);
+			}, parseInt(settings[thisId].trigger));
+		} else if ('exit' === settings[thisId].method) {
+			document.addEventListener('mouseleave', function(e) {
+				e = (e) ? e : window.event;
+				if ( e.clientY < 0) {
+					return showModal(el);
+				}
+			});
 		}
 	}
 

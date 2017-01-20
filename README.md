@@ -1,11 +1,11 @@
 # Modal Monitor
-A simple JS library (with zero dependancies) that will help you trigger modal popups based on time, or scroll position
+A simple JS library (with zero dependancies) that will help you trigger modal popups based on time, scroll position, or exit intent.
 
 ## Quick Overview
 
 ### The Backdrop
 
-Each each element that you intend to turn into a modal should be wrapped in a DIV with the class of `.modal-monitor-backdrop`. This DIV will create the backdrop behind the modal. The backdrop can be styled however you'd like.
+Each element that you intend to turn into a modal should be wrapped in a DIV with the class of `.modal-monitor-backdrop`. This DIV will create the backdrop behind the modal. The backdrop can be styled however you'd like.
 
 ### The modal
 
@@ -15,10 +15,11 @@ Four attributes must be present with each element that you'd like to turn into a
 
 1. A unique id
 2. A class of `modal-monitor`
-3. A `data-method` attribute with the value of either "scroll", or "timed"
+3. A `data-method` attribute with the value of "exit", "scroll", or "timed"
 4. A `data-trigger` attribute:
   - for a **timed** method the trigger would be time in ms (i.e. 10000 would trigger the modal after 10 seconds)
   - for a **scroll** method "middle", or "bottom" are the valid trigger options signifying the position on the page that the modal should be triggered
+  - for a **exit** method, this can be left blank
 
 You can have as many modals on a page as you'd like as long as they each have the 4 attributes listed above.
 
@@ -57,6 +58,17 @@ With modal monitor, you can turn any DOM element into a modal popup. Here are a 
 ```
 <div class="modal-monitor-backdrop">
 	<div id="timed10000" class="modal-monitor" data-method="timed" data-trigger="10000" data-frequency="7">10 seconds has passed before showing this modal. With the frequency set to 7, this modal will be shown again after 7 day (as long as no conversion has been registered).</div>
+</div>
+<script type="text/javascript" src="modalmonitor.js"></script>
+<script>
+	MODAL.Monitor.init();
+</script>
+```
+
+**3) After 10 seconds**
+```
+<div class="modal-monitor-backdrop">
+	<div id="exit" class="modal-monitor" data-method="exit" data-trigger="" data-frequency="365">When they go to leave the page, show this modal. With the frequency set to 365, this modal will be shown again after 365 day (as long as no conversion has been registered).</div>
 </div>
 <script type="text/javascript" src="modalmonitor.js"></script>
 <script>
