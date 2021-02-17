@@ -138,9 +138,8 @@ window.MODAL.Monitor = function () {
 				return showModal(el);
 			}, parseInt(settings[thisId].trigger));
 		} else if ('exit' === settings[thisId].method) {
-			document.addEventListener('mouseleave', function(e) {
-				e = (e) ? e : window.event;
-				if ( e.clientY < 0) {
+			document.addEventListener('mouseout', e => {
+    			if (!e.toElement && !e.relatedTarget) {
 					return showModal(el);
 				}
 			});
