@@ -118,11 +118,11 @@ window.MODAL.Monitor = function () {
 			settings[thisId].trigger = data(el, 'trigger');
 		// Scrolling method
 		if ('scroll' === settings[thisId].method) {
-			var bodyHeight = document.body.offsetHeight,
+			var bodyHeight = document.body.scrollHeight,
 				middle = parseInt(bodyHeight/2),
 				bottom = parseInt(bodyHeight-[bodyHeight*0.15]);
 			document.addEventListener('scroll', debounce(function() {
-				var scrolled = parseInt(document.body.scrollTop);
+				var scrolled = parseInt(window.pageYOffset);
 				if ('middle' === settings[thisId].trigger && middle < scrolled) {
 					return showModal(el);
 				}
