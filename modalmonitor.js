@@ -118,11 +118,11 @@ window.MODAL.Monitor = function () {
 			settings[thisId].trigger = data(el, 'trigger');
 		// Scrolling method
 		if ('scroll' === settings[thisId].method) {
-			var bodyHeight = document.body.offsetHeight,
+			var bodyHeight = document.body.scrollHeight,
 				middle = parseInt(bodyHeight/2),
 				bottom = parseInt(bodyHeight-[bodyHeight*0.15]);
 			document.addEventListener('scroll', debounce(function() {
-				var scrolled = parseInt(document.body.scrollTop);
+				var scrolled = parseInt(window.pageYOffset);
 				if ('middle' === settings[thisId].trigger && middle < scrolled) {
 					return showModal(el);
 				}
@@ -138,9 +138,8 @@ window.MODAL.Monitor = function () {
 				return showModal(el);
 			}, parseInt(settings[thisId].trigger));
 		} else if ('exit' === settings[thisId].method) {
-			document.addEventListener('mouseleave', function(e) {
-				e = (e) ? e : window.event;
-				if ( e.clientY < 0) {
+			document.addEventListener('mouseout', e => {
+    			if (!e.toElement && !e.relatedTarget) {
 					return showModal(el);
 				}
 			});
